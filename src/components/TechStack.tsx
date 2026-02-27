@@ -3,6 +3,9 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { CanvasText } from "./ui/canvas-text";
+
+
 export function TechStack() {
     const [expanded, setExpanded] = useState(false);
     const [hovered, setHovered] = useState<string | null>(null);
@@ -76,7 +79,29 @@ export function TechStack() {
                     className="flex items-end justify-between mb-6"
                 >
                     <h2 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
-                        Tech Stack
+
+                        <CanvasText
+                            text="Tech Stack"
+                            // Matches your site's white background
+                            backgroundClassName="bg-white"
+
+                            // Replaced Whites with Blacks/Grays for visibility on White
+                            colors={[
+                                "rgba(0, 0, 0, 1)",       // Pure Black
+                                "rgba(9, 9, 11, 0.9)",    // Zinc-950
+                                "rgba(24, 24, 27, 0.8)",  // Zinc-900
+                                "rgba(39, 39, 42, 0.7)",  // Zinc-800
+                                "rgba(63, 63, 70, 0.6)",  // Zinc-700
+                                "rgba(82, 82, 91, 0.5)",  // Zinc-600
+                                "rgba(113, 113, 122, 0.4)", // Zinc-500
+                                "rgba(161, 161, 170, 0.3)", // Zinc-400
+                                "rgba(212, 212, 216, 0.2)", // Zinc-300
+                                "rgba(228, 228, 231, 0.1)", // Zinc-200
+                            ]}
+
+                            lineGap={4}
+                            animationDuration={20}
+                        />
                     </h2>
 
                     <button

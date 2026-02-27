@@ -1,130 +1,98 @@
 "use client";
-import React, { useState, useEffect } from "react";
+
+import React, { useEffect, useState } from "react";
 import { GitHubCalendar } from "react-github-calendar";
-import { ActivityCalendar } from "react-activity-calendar";
 import { motion } from "framer-motion";
 
+import { CanvasText } from "./ui/canvas-text";
+
+
+
 export function ActivityHub() {
-  const [leetcodeData, setLeetcodeData] = useState<any[] | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [mounted, setMounted] = useState(false); // 👈 fix
+    const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true); // 👈 only runs on client
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
-    async function fetchLeetCode() {
-      try {
-        const res = await fetch("https://alfa-leetcode-api.onrender.com/somandhir/calendar");
-        const data = await res.json();
+    return (
+        <section className="w-full bg-black px-6 py-12 md:py-16 -mt-18">
+            <div className="max-w-5xl mx-auto space-y-12">
 
-        if (data && data.submissionCalendar) {
-          const parsed = JSON.parse(data.submissionCalendar);
-          const formattedData = Object.entries(parsed).map(([timestamp, count]) => {
-            const date = new Date(parseInt(timestamp) * 1000);
-            return {
-              date: date.toISOString().split("T")[0],
-              count: count as number,
-              level: Math.min(Number(count), 4),
-            };
-          });
-          setLeetcodeData(formattedData);
-        }
-      } catch (err) {
-        console.error("LeetCode API fetch failed:", err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchLeetCode();
-  }, []);
+                {/* Section Title */}
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                    className="text-3xl md:text-4xl font-bold text-white tracking-tight"
+                >
+                    <CanvasText
+                        text="In the Trenches"
+                        // Matches your site's white background
+                        backgroundClassName="bg-white"
 
-  return (
-    <section className="w-full bg-black px-6 py-12 md:py-16 -mt-18">
-      <div className="max-w-5xl mx-auto space-y-12">
+                        // Replaced Whites with Blacks/Grays for visibility on White
+                        colors={[
+                            "rgba(0, 0, 0, 1)",       // Pure Black
+                            "rgba(9, 9, 11, 0.9)",    // Zinc-950
+                            "rgba(24, 24, 27, 0.8)",  // Zinc-900
+                            "rgba(39, 39, 42, 0.7)",  // Zinc-800
+                            "rgba(63, 63, 70, 0.6)",  // Zinc-700
+                            "rgba(82, 82, 91, 0.5)",  // Zinc-600
+                            "rgba(113, 113, 122, 0.4)", // Zinc-500
+                            "rgba(161, 161, 170, 0.3)", // Zinc-400
+                            "rgba(212, 212, 216, 0.2)", // Zinc-300
+                            "rgba(228, 228, 231, 0.1)", // Zinc-200
+                        ]}
 
-        {/* Section Title */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold text-white tracking-tight"
-        >
-          In the Trenches
-        </motion.h2>
+                        lineGap={4}
+                        animationDuration={20}
+                    />
 
-        {/* GitHub */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <div className="flex items-center gap-3 mb-4 -mt-5">
-            <span className="text-xs font-mono text-zinc-600 tracking-wider uppercase">GitHub</span>
-            <span className="text-zinc-800">•</span>
-            <span className="text-xs font-mono text-zinc-600">Contributions</span>
-          </div>
 
-          <div className="pb-6 -mb-10">
-            <div className="overflow-x-auto">
-              {mounted && ( 
-                <GitHubCalendar
-                  username="somandhir"
-                  theme={{
-                    dark: ["#0d0d0d", "#0e4429", "#006d32", "#26a641", "#39d353"],
-                  }}
-                  style={{ color: "#52525b" }}
-                  labels={{
-                    totalCount: "{{count}} contributions in the last year",
-                  }}
-                />
-              )}
+                </motion.h2>
+
+                {/* GitHub Section */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    viewport={{ once: true }}
+                >
+                    <div className="flex items-center gap-3 mb-4">
+                        <span className="text-xs font-mono text-zinc-600 tracking-wider uppercase">
+                            GitHub
+                        </span>
+                        <span className="text-zinc-800">•</span>
+                        <span className="text-xs font-mono text-zinc-600">
+                            Contributions
+                        </span>
+                    </div>
+
+                    <div className="overflow-x-auto">
+                        {mounted && (
+                            <GitHubCalendar
+                                username="somandhir"
+                                theme={{
+                                    dark: [
+                                        "#0d0d0d",
+                                        "#0e4429",
+                                        "#006d32",
+                                        "#26a641",
+                                        "#39d353",
+                                    ],
+                                }}
+                                style={{ color: "#52525b" }}
+                                labels={{
+                                    totalCount: "{{count}} contributions in the last year",
+                                }}
+                            />
+                        )}
+                    </div>
+                </motion.div>
+
             </div>
-          </div>
-        </motion.div>
-
-        {/* LeetCode */}
-        {mounted && leetcodeData && leetcodeData.length > 0 && ( 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-xs font-mono text-zinc-600 tracking-wider uppercase">LeetCode</span>
-              <span className="text-zinc-800">•</span>
-              <span className="text-xs font-mono text-zinc-600">Submissions</span>
-            </div>
-
-            <div className="pb-6 ">
-              <div className="overflow-x-auto">
-                <ActivityCalendar
-                  data={leetcodeData}
-                  theme={{
-                    dark: ["#0d0d0d", "#6b4c00", "#9e7100", "#cf9500", "#ffb800"],
-                  }}
-                  style={{ color: "#52525b" }}
-                  labels={{
-                    totalCount: "{{count}} submissions in the last year",
-                  }}
-                />
-              </div>
-            </div>
-          </motion.div>
-        )}
-
-        {/* Loading state */}
-        {mounted && loading && (
-          <div className="flex items-center gap-3 pb-6 border-b border-zinc-900">
-            <span className="text-xs font-mono text-zinc-600 tracking-wider uppercase">LeetCode</span>
-            <span className="text-zinc-800">•</span>
-            <span className="text-xs font-mono text-zinc-700 animate-pulse">fetching activity...</span>
-          </div>
-        )}
-
-      </div>
-    </section>
-  );
+        </section>
+    );
 }

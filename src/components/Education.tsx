@@ -2,6 +2,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 
+import { CanvasText } from "./ui/canvas-text";
+
+
+
 export function Education() {
     const educationData = [
         {
@@ -11,7 +15,7 @@ export function Education() {
             score: "8.54 / 10",
             stream: "Computer Science",
         },
-       
+
     ];
 
     return (
@@ -25,7 +29,30 @@ export function Education() {
                     viewport={{ once: true }}
                     className="text-3xl md:text-4xl font-bold text-white tracking-tight mb-6 md:mb-8"
                 >
-                    Education
+                    <CanvasText
+                        text="Education"
+                        // Matches your site's white background
+                        backgroundClassName="bg-white"
+
+                        // Replaced Whites with Blacks/Grays for visibility on White
+                        colors={[
+                            "rgba(0, 0, 0, 1)",       // Pure Black
+                            "rgba(9, 9, 11, 0.9)",    // Zinc-950
+                            "rgba(24, 24, 27, 0.8)",  // Zinc-900
+                            "rgba(39, 39, 42, 0.7)",  // Zinc-800
+                            "rgba(63, 63, 70, 0.6)",  // Zinc-700
+                            "rgba(82, 82, 91, 0.5)",  // Zinc-600
+                            "rgba(113, 113, 122, 0.4)", // Zinc-500
+                            "rgba(161, 161, 170, 0.3)", // Zinc-400
+                            "rgba(212, 212, 216, 0.2)", // Zinc-300
+                            "rgba(228, 228, 231, 0.1)", // Zinc-200
+                        ]}
+
+                        lineGap={4}
+                        animationDuration={20}
+                    />
+
+
                 </motion.h2>
 
                 {/* Education Items */}
