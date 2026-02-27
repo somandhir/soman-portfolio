@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@radix-ui/react-hover-card": "^1.1.15",
     "@tabler/icons-react": "^3.37.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -17,6 +18,7 @@
     "mini-svg-data-uri": "^1.4.4",
     "motion": "^12.34.3",
     "next": "16.1.6",
+    "qss": "^3.0.0",
     "react": "19.2.3",
     "react-activity-calendar": "^3.1.1",
     "react-dom": "19.2.3",

@@ -235,7 +235,7 @@ export function Projects() {
             {cursorText && (
                 <div
                     ref={cursorRef}
-                    className="pointer-events-none fixed top-0 left-0 z-9999 px-3 py-1 rounded-full bg-white text-black text-xs font-semibold shadow-lg will-change-transform"
+                    className="pointer-events-none fixed -top-10 -left-10 z-9999 px-3 py-1 rounded-full bg-white text-black text-xs font-semibold shadow-lg will-change-transform"
                 >
                     {cursorText}
                 </div>
