@@ -14,7 +14,7 @@ export function PointerHighlight({
   pointerClassName?: string;
   containerClassName?: string;
 }) {
-  const containerRef = useRef<HTMLSpanElement>(null); // Changed from HTMLDivElement
+  const containerRef = useRef<HTMLSpanElement>(null); 
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {

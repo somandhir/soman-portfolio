@@ -53,7 +53,7 @@ export function TechStack() {
         "Backend & DB": [
             { name: "Node.js", icon: "nodedotjs", color: "339933" },
             { name: "Express.js", icon: "express", color: "ffffff" },
-            { name: "JWT Auth", icon: "jsonwebtokens", color: "000000" },
+            { name: "JWT Auth", icon: "jsonwebtokens", color: "ffffff" },
             { name: "MongoDB", icon: "mongodb", color: "47A248" },
             { name: "PostgreSQL", icon: "postgresql", color: "4169E1" },
             { name: "Redis", icon: "redis", color: "DC382D" },
@@ -82,21 +82,19 @@ export function TechStack() {
 
                         <CanvasText
                             text="Tech Stack"
-                            // Matches your site's white background
                             backgroundClassName="bg-white"
 
-                            // Replaced Whites with Blacks/Grays for visibility on White
                             colors={[
-                                "rgba(0, 0, 0, 1)",       // Pure Black
-                                "rgba(9, 9, 11, 0.9)",    // Zinc-950
-                                "rgba(24, 24, 27, 0.8)",  // Zinc-900
-                                "rgba(39, 39, 42, 0.7)",  // Zinc-800
-                                "rgba(63, 63, 70, 0.6)",  // Zinc-700
-                                "rgba(82, 82, 91, 0.5)",  // Zinc-600
-                                "rgba(113, 113, 122, 0.4)", // Zinc-500
-                                "rgba(161, 161, 170, 0.3)", // Zinc-400
-                                "rgba(212, 212, 216, 0.2)", // Zinc-300
-                                "rgba(228, 228, 231, 0.1)", // Zinc-200
+                                "rgba(0, 0, 0, 1)",       
+                                "rgba(9, 9, 11, 0.9)",    
+                                "rgba(24, 24, 27, 0.8)",  
+                                "rgba(39, 39, 42, 0.7)",  
+                                "rgba(63, 63, 70, 0.6)",  
+                                "rgba(82, 82, 91, 0.5)",  
+                                "rgba(113, 113, 122, 0.4)", 
+                                "rgba(161, 161, 170, 0.3)", 
+                                "rgba(212, 212, 216, 0.2)", 
+                                "rgba(228, 228, 231, 0.1)", 
                             ]}
 
                             lineGap={4}
@@ -177,7 +175,7 @@ export function TechStack() {
                                                     />
 
                                                     <span
-                                                        className="text-sm transition-colors duration-300"
+                                                        className="text-sm transition-colors duration-300 z-5"
                                                         style={{
                                                             color: isHovered ? `#${tech.color}` : "#52525b",
                                                         }}
