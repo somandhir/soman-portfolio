@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { CanvasText } from "./ui/canvas-text";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { ExternalLink } from "lucide-react";
-import Link from "next/link";
 
 const GithubSVG = () => (
     <svg
@@ -97,86 +96,100 @@ const ProjectCard = ({
     tags,
     github,
     live,
-    slug
-}: Project) => {
+    slug,
+    setCursorText
+}: Project & { setCursorText: (text: string) => void }) => {
     return (
         <li className={`min-h-56 list-none ${area}`}>
-                <div className="relative h-full rounded-2xl border border-zinc-800 p-2 md:rounded-3xl md:p-3 bg-black cursor-pointer"
-                        onClick={() => window.open(`/projects/${slug}`, "_blank")}
+            <div className="relative h-full rounded-2xl border border-zinc-800 p-2 md:rounded-3xl md:p-3 bg-black cursor-pointer"
+                onClick={() => window.open(`/projects/${slug}`, "_blank")}
+                onMouseEnter={() => setCursorText("View Details")}
+                onMouseLeave={() => setCursorText("")}
 
-                >
-                    <GlowingEffect
-                        spread={40}
-                        glow={true}
-                        disabled={false}
-                        proximity={64}
-                        inactiveZone={0.01}
-                    />
-                    <div className="relative flex h-full flex-col justify-between gap-4 overflow-hidden rounded-xl p-5 md:p-6 shadow-[0px_0px_27px_0px_#1a1a1a]">
+            >
+                <GlowingEffect
+                    spread={40}
+                    glow={true}
+                    disabled={false}
+                    proximity={64}
+                    inactiveZone={0.01}
+                />
+                <div className="relative flex h-full flex-col justify-between gap-4 overflow-hidden rounded-xl p-5 md:p-6 shadow-[0px_0px_27px_0px_#1a1a1a]">
 
-                        {/* Header */}
-                        <div className="flex items-start justify-between gap-2">
-                            <div>
-                                <h3 className="text-base md:text-lg font-semibold text-white tracking-tight leading-tight">
-                                    {title}
-                                </h3>
-                                <p className="text-xs text-zinc-600 font-mono mt-0.5">
-                                    {subtitle}
-                                </p>
-                            </div>
-                            <div className="flex items-center gap-2 shrink-0 mt-0.5">
+                    {/* Header */}
+                    <div className="flex items-start justify-between gap-2">
+                        <div>
+                            <h3 className="text-base md:text-lg font-semibold text-white tracking-tight leading-tight">
+                                {title}
+                            </h3>
+                            <p className="text-xs text-zinc-600 font-mono mt-0.5">
+                                {subtitle}
+                            </p>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0 mt-0.5">
+                            <a
+                                href={github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+
+                                className="text-zinc-600 hover:text-white transition-colors"
+                            >
+                                <GithubSVG />
+                            </a>
+                            {live && (
                                 <a
-                                    href={github}
+                                    href={live}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     onClick={(e) => e.stopPropagation()}
 
                                     className="text-zinc-600 hover:text-white transition-colors"
                                 >
-                                    <GithubSVG />
+                                    <ExternalLink className="h-4 w-4" />
                                 </a>
-                                {live && (
-                                    <a
-                                        href={live}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        onClick={(e) => e.stopPropagation()}
-
-                                        className="text-zinc-600 hover:text-white transition-colors"
-                                    >
-                                        <ExternalLink className="h-4 w-4" />
-                                    </a>
-                                )}
-                            </div>
+                            )}
                         </div>
-
-                        {/* Description */}
-                        <p className="flex-1 text-sm text-zinc-500 font-light leading-relaxed">
-                            {description}
-                        </p>
-
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-1.5 pt-3 border-t border-zinc-900">
-                            {tags.map((tag) => (
-                                <span
-                                    key={tag}
-                                    className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-zinc-800 text-zinc-600 tracking-wider"
-                                >
-                                    {tag}
-                                </span>
-                            ))}
-                        </div>
-
                     </div>
+
+                    {/* Description */}
+                    <p className="flex-1 text-sm text-zinc-500 font-light leading-relaxed">
+                        {description}
+                    </p>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-1.5 pt-3 border-t border-zinc-900">
+                        {tags.map((tag) => (
+                            <span
+                                key={tag}
+                                className="text-[10px] font-mono px-2 py-0.5 rounded-full border border-zinc-800 text-zinc-600 tracking-wider"
+                            >
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+
                 </div>
-        
+            </div>
+
         </li>
     );
 };
 
 export function Projects() {
+    const [cursorText, setCursorText] = React.useState("");
+    const cursorRef = React.useRef<HTMLDivElement | null>(null);
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (cursorRef.current) {
+            cursorRef.current.style.transform = `translate(${e.clientX + 12}px, ${e.clientY + 12}px)`;
+        }
+    };
     return (
-        <section className="w-full bg-black px-6 py-12 md:py-16">
+        <section
+            className="w-full bg-black px-6 py-12 md:py-16 relative"
+            onMouseMove={handleMouseMove}
+        >
             <div className="max-w-5xl mx-auto">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
@@ -213,11 +226,20 @@ export function Projects() {
                 >
                     <ul className="grid grid-cols-1 gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 xl:max-h-136 xl:grid-rows-2">
                         {projectsData.map((project, index) => (
-                            <ProjectCard key={index} {...project} />
+                            <ProjectCard key={index} {...project} setCursorText={setCursorText}
+                            />
                         ))}
                     </ul>
                 </motion.div>
             </div>
+            {cursorText && (
+                <div
+                    ref={cursorRef}
+                    className="pointer-events-none fixed top-0 left-0 z-9999 px-3 py-1 rounded-full bg-white text-black text-xs font-semibold shadow-lg will-change-transform"
+                >
+                    {cursorText}
+                </div>
+            )}
         </section>
     );
 }
