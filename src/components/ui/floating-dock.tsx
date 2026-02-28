@@ -170,8 +170,8 @@ function IconContainer({
   return (
     <a
       href={href}
-      target="_blank"
-      rel="noopener noreferrer"
+      target={href.startsWith("#") ? undefined : "_blank"}
+      rel={href.startsWith("#") ? undefined : "noopener noreferrer"}
     >
       <motion.div
         ref={ref}

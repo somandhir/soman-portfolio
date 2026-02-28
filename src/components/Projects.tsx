@@ -187,7 +187,7 @@ export function Projects() {
     };
     return (
         <section
-            className="w-full bg-black px-6 py-12 md:py-16 relative"
+            className="w-full bg-black px-6 py-12 md:py-16 relative -mt-10"
             onMouseMove={handleMouseMove}
         >
             <div className="max-w-5xl mx-auto">

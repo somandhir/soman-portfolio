@@ -1,4 +1,6 @@
+import { Contact } from "@/components/Contact";
 import { Education } from "@/components/Education";
+import { Footer } from "@/components/Footer";
 import { ActivityHub } from "@/components/GithubGraph";
 import { Hero } from "@/components/Hero";
 import { Projects } from "@/components/Projects";
@@ -16,6 +18,8 @@ export default function Home() {
       <ActivityHub/>
       <Projects/>
       <FromCuriosityToCode/>
+      <Contact/>
+      <Footer/>
     </main>
   );
 }

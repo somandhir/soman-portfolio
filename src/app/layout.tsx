@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Dock } from "@/components/Dock";
+import { ClientLayout } from "@/components/ClientLayout";
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -33,8 +34,8 @@ export default function RootLayout({
           geistMono.variable
         )}
       >
-        {children}
-        <Dock/>
+         <ClientLayout>{children}</ClientLayout>
+       
       </body>
     </html>
   );

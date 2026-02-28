@@ -7,7 +7,8 @@ import {
     IconMail,
     IconFileCv,
     IconCode,
-    IconMessage
+    IconMessage,
+    IconFolderCode
 } from "@tabler/icons-react";
 
 export function Dock() {
@@ -34,8 +35,8 @@ export function Dock() {
         },
         {
             title: "Contact",
-            icon: <IconMessage className="h-full w-full text-white" />, 
-            href: "/contact"
+            icon: <IconMessage className="h-full w-full text-white" />,
+            href: "#contact"
         },
     ];
 

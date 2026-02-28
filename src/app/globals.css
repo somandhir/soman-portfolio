@@ -134,3 +134,7 @@ body {
 .animate-scroll {
   animation: scroll 20s linear infinite;
 }
+
+::selection{
+    @apply bg-cyan-400 text-black;
+}

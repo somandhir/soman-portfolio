@@ -7,7 +7,7 @@ import { LinkPreview } from "./ui/link-preview";
 
 export function FromCuriosityToCode() {
     return (
-        <section className="w-full bg-black px-6 py-12 md:py-16">
+        <section className="w-full bg-black px-6 py-12 md:py-16 -mt-10">
             <div className="max-w-5xl mx-auto">
 
                 {/* Section Heading */}
@@ -77,11 +77,11 @@ export function FromCuriosityToCode() {
                             <span className="text-white underline underline-offset-4 cursor-pointer">
                                 CodeChef
                             </span>
-                        </LinkPreview>. 
+                        </LinkPreview>.
                         Within two months I became a 2★ coder(but took way too long for 3★ O.O), eventually reaching a rating of 1742.
-       
+
                         I later transitioned into deeper problem solving on{" "}
-                        <LinkPreview url="https://leetcode.com/somandhir">
+                        <LinkPreview url="https://leetcode.com/u/somandhir/">
                             <span className="text-white underline underline-offset-4 cursor-pointer">
                                 LeetCode
                             </span>
@@ -92,7 +92,7 @@ export function FromCuriosityToCode() {
                     <div>
                         Alongside algorithms, I began building — starting with HTML/CSS,
                         evolving into Next.js, Docker, Redis, and scalable backend systems.
-                    
+
                         Today, my curiosity has shifted toward system design —
                         exploring how systems handle{" "}
                         <LinkPreview url="https://youtu.be/W4EwfEU8CGA?si=cA5lUHZYbIMNBOMc">

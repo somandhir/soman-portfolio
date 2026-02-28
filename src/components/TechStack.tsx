@@ -41,7 +41,6 @@ export function TechStack() {
             { name: "TypeScript", icon: "typescript", color: "3178C6" },
             { name: "Python", icon: "python", color: "3776AB" },
             { name: "C++", icon: "cplusplus", color: "00599C" },
-            { name: "Java", icon: "openjdk", color: "ED8B00" },
         ],
         Frontend: [
             { name: "React", icon: "react", color: "61DAFB" },
