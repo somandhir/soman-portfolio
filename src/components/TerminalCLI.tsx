@@ -33,6 +33,7 @@ const COMMANDS: Record<string, string[]> = {
         "  --skills        Display technical skills",
         "  --contact       Display contact information",
         "  --education     Show education details",
+        "  --achievements  List all achievements",
         "  clear           Clear the terminal",
     ],
     "--profile": [
@@ -64,6 +65,13 @@ const COMMANDS: Record<string, string[]> = {
         "  03  NexusStream (Video Streaming Platform)",
         "  04  Echo-chat (Real-time Messaging Application)",
         "  05  Portfolio Website",
+    ],
+    "--achievements": [
+        "  01  Knight on Leetcode",
+        "  02  Specialist on Codeforces",
+        "  03  Top 20 Finalist — TrustAI Ideathon 2026",
+        "  04  Reliance Foundation Scholar",
+        "  05  98.2%ile in jee mains",
     ],
 
 };
@@ -169,7 +177,7 @@ export function TerminalCLI() {
                         exit={{ opacity: 0, y: -12, scale: 0.97 }}
                         transition={{ duration: 0.18, ease: "easeOut" }}
                         className="
-              fixed top-[4.5rem] right-6 z-50
+              fixed top-18 right-6 z-50
               w-[min(520px,calc(100vw-3rem))]
               bg-black border border-zinc-800
               shadow-[0_8px_60px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.03)]
