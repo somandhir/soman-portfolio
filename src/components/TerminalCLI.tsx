@@ -43,10 +43,10 @@ const COMMANDS: Record<string, string[]> = {
         "  interest   Cats ",
     ],
     "--skills": [
-        "  languages  C++  Python  JavaScript TypeScript",
-        "  backend    Node.js  Express.js  REST APIs",
-        "  frontend   React  Next.js  Tailwind CSS Aceternity UI",
-        "  databases  MongoDB  MySQL Redis PostgreSQL",
+        "  languages  C++ Python JavaScript TypeScript",
+        "  backend    Node.js Express.js REST APIs",
+        "  frontend   React Next.js Tailwind CSS Aceternity UI",
+        "  databases  MongoDB MySQL Redis PostgreSQL",
     ],
     "--contact": [
         "  email      somandhir@gmail.com",
