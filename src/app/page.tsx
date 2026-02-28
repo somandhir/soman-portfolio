@@ -6,7 +6,6 @@ import { Hero } from "@/components/Hero";
 import { Projects } from "@/components/Projects";
 import { FromCuriosityToCode } from "@/components/Story";
 import { TechStack } from "@/components/TechStack";
-import { BackgroundBeams } from "@/components/ui/background-beams";
 
 export default function Home() {
   return (
