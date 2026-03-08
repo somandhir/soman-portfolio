@@ -3,7 +3,12 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Music, Volume2 } from "lucide-react";
-import { PointerHighlight } from "./ui/pointer-highlight";
+// import { PointerHighlight } from "./ui/pointer-highlight";
+import dynamic from "next/dynamic"
+const PointerHighlight = dynamic(
+    () => import("./ui/pointer-highlight").then(mod => mod.PointerHighlight),
+    { ssr: false }
+)
 import type { Variants } from "framer-motion";
 
 export function Hero() {
@@ -28,8 +33,8 @@ export function Hero() {
 
     const itemVariants: Variants = {
         hidden: { opacity: 0, y: 20 },
-        visible: { 
-            opacity: 1, 
+        visible: {
+            opacity: 1,
             y: 0,
             transition: { duration: 0.6, ease: "easeOut" }
         }
@@ -52,18 +57,26 @@ export function Hero() {
     }, []);
 
     useEffect(() => {
-        audioRef.current = new Audio("/aventure-dreamy-lofi-nostalgic-background-469629.mp3");
-        audioRef.current.loop = true;
-        audioRef.current.volume = volume;
         return () => {
             audioRef.current?.pause();
             audioRef.current = null;
         };
     }, []);
 
-    const togglePlay = () => {
-        if (!audioRef.current) return;
-        isPlaying ? audioRef.current.pause() : audioRef.current.play();
+    const togglePlay = async () => {
+        if (!audioRef.current) {
+            const audio = new Audio("/aventure-dreamy-lofi-nostalgic-background-469629.mp3");
+            audio.loop = true;
+            audio.volume = volume;
+            audioRef.current = audio;
+        }
+
+        if (isPlaying) {
+            audioRef.current.pause();
+        } else {
+            await audioRef.current.play();
+        }
+
         setIsPlaying(!isPlaying);
     };
 
@@ -97,7 +110,7 @@ export function Hero() {
     }, [isDragging]);
 
     return (
-        <motion.section 
+        <motion.section
             initial="hidden"
             animate="visible"
             variants={containerVariants}
@@ -106,7 +119,7 @@ export function Hero() {
             <div className="z-10 flex flex-col items-center text-center">
 
                 {/* Image — Animated Entrance */}
-                <motion.div 
+                <motion.div
                     variants={itemVariants}
                     className="relative w-64 h-64 md:w-80 md:h-80 -mb-12 -mt-6"
                 >
@@ -124,7 +137,7 @@ export function Hero() {
                 </motion.div>
 
                 {/* Name — Animated Entrance */}
-                <motion.h1 
+                <motion.h1
                     variants={itemVariants}
                     className="text-5xl md:text-7xl font-bold bg-linear-to-b from-white to-zinc-400 bg-clip-text text-transparent tracking-tighter relative z-20 leading-none"
                 >
@@ -132,7 +145,7 @@ export function Hero() {
                 </motion.h1>
 
                 {/* Status line — Animated Entrance */}
-                <motion.div 
+                <motion.div
                     variants={itemVariants}
                     className="mt-2 flex flex-wrap items-center justify-center gap-3 text-zinc-500 font-mono text-xs md:text-sm"
                 >
